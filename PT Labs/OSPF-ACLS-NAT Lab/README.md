@@ -1,1 +1,11 @@
+This is a basic lab I built myself. The switches are not configured beyond CDP running on them.
 
+My original goal was to experiment with route-mapping, using NAT on both the uplinks from R1. However, Packet Tracer doesn't support the route-map command or logic, so I shifted the focus to practice using ACLs, OSPF, and NAT overload/PAT.
+
+R1 has both R2 and R3 as OSPF neighbors in area 0. All routers advertise all interfaces, but their LAN-side interfaces are configured as passive. With this small of a topology, static routing could have easily worked, but OSPF was slightly quicker to configure.
+
+I wanted to practice using ACLs, and in particular, extended ACLs that specify ports. So, for the sake of the lab, I decided that SRV2 would be my DNS server, and SRV3 a web server. I created an ACL called G0/0_IN with one entry permitting UDP traffic from any IP destined for SRV2 on port 53 (DNS). I then made another permit entry with the same parameters for TCP traffic, since any DNS messages greater than 512 bytes are handled with TCP. Finally, I added an entry permitting TCP traffic from any IP destined for SRV3 on port 443 (HTTPS). I then let the implicit deny take care of any other inbound traffic. I applied the ACL to R1's G0/0 in, following the best general practice of applying extended ACLs as close to the source as practical.
+
+This meant I couldn't ping either server, or even access SRV3 on port 80 (HTTP). I configured SRV2 to serve DNS, so that if PC1 or PC2 entered https://srv3web.com in their browsers, they could access SRV3's web page by first querying SRV2 to resolve the domain name to an IP.
+
+Finally, I added PAT from R1 to R3. I configured the LAN interface and R3-facing interface of R1 as inside and outside, respectively. I then created an ACL to be used in the PAT command, ACL 1, which permitted any host in 10.0.0.0/24. This would eventually be used to list the IPs that were eligible to be translated. I then issued the NAT command, using list 1 and interface G0/2 (R1's R3-facing interface) and adding "overload" at the end of the command. So, any traffic from 10.0.0.0/24 will be translated on its way out of that interface, taking on R1's G0/2 IP as its inside global address, and using a randomly selected source port number to identify its inside local source when response traffic is received from R3.
