@@ -43,6 +43,7 @@ spanning-tree mode pvst
 interface GigabitEthernet0/0
  ip address 10.0.0.254 255.255.255.0
  ip nat inside
+ ip access-group G0/0_IN in
  duplex auto
  speed auto
 !
@@ -92,4 +93,5 @@ line vty 0 4
 !
 !
 end
+
 
