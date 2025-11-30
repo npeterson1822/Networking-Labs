@@ -1,0 +1,189 @@
+Building configuration...
+
+Current configuration : 3996 bytes
+!
+! Last configuration change at 23:30:01 UTC Sun Nov 30 2025
+!
+version 17.16
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-131184642
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-131184642
+ revocation-check none
+ rsakeypair TP-self-signed-131184642
+ hash sha512
+!
+!
+crypto pki certificate chain TP-self-signed-131184642
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0D050030 
+  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333131 38343634 32301E17 0D323531 31333032 33313235 
+  325A170D 33353131 33303233 31323532 5A303031 2E302C06 03550403 0C25494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834 
+  36343230 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 D13F4BAA 471CD572 DE93631E D5F733CE FDEA98CC 9AF8E41A 7CA59E03 
+  875133CB 8D96365B DD3A5A2F 3FC51E56 B3D9F97B 05FABF83 659D261C E322B858 
+  A88A0E62 EC5A6BF2 05208210 73FC340C 61485298 127D19F2 EAE419D4 EF1165C0 
+  2D27A8A3 F2ADFD96 C672028D F72FCA51 5C1297E3 46E8DF41 29B6565E 2FE10A4A 
+  7863F80C CF064421 7347C0D8 0D1FDCE6 37BD23A9 FD3B1E70 BAB6CD94 2CEF603E 
+  B872FE8A 5E920307 6F7D9A8C A58ECF9F E60FC326 480C1A93 B2AB62E1 A36C6349 
+  9C01B0F8 C09D19F3 E0C432DF EC15FE4A 8FC1E52A CFDFFF18 A4428449 407E2C1B 
+  209B7CFE E7C09D15 F676046F 9CAA1032 EEDCBEEA B132968B 31EB3C57 A015E4FF 
+  512807F7 02030100 01A35330 51301D06 03551D0E 04160414 85B50C62 F4607CE6 
+  D4BD4D98 3D8E9774 01D55CF9 301F0603 551D2304 18301680 1485B50C 62F4607C 
+  E6D4BD4D 983D8E97 7401D55C F9300F06 03551D13 0101FF04 05300301 01FF300D 
+  06092A86 4886F70D 01010D05 00038201 010015DC 9A5C8C8F 97806478 C1D072EE 
+  20F98EA5 6C8DDB69 1480CB9C 468E32D7 1BEE5F80 C823E775 9F3BD6FC 86A69091 
+  F4D1B0DC A333F7B8 D6090A97 5D28D6C5 BD6D4E7E 90C25BC5 EA14BCA8 3EAF01E1 
+  F972CB93 C5A386F3 72236B72 37EE8C67 76D507BD 659DFD47 E986E6AC 2D9BF1DF 
+  A92DE952 17AC8E4C CF4DB80F 0B4A92A7 B3D8EE51 6896D21F 47A46004 B34BDB6A 
+  49B6BA1F 20BC4357 CFCDA063 61767A5D 6890FECD 8271DC01 FA45E0AD 18B7B670 
+  307EDB79 1AF1A122 78EA1DC8 86977AC8 16A60F4C 3E874B52 E9149A27 BC0C8867 
+  175868B0 E677FB34 92FF1496 CD11AA54 460DB17F 634C8C69 CCCDAE39 1D06F15F 
+  15467784 48C43039 1956E8BE CA736038 BC22
+  	quit
+!
+!
+memory free low-watermark processor 79983
+!
+!
+spanning-tree mode rapid-pvst
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 192.168.0.254 255.255.255.0
+ ip nat inside
+!
+interface Ethernet0/1
+ ip address 203.0.113.1 255.255.255.252
+ ip nat outside
+!
+interface Ethernet0/2
+ ip address 198.51.100.1 255.255.255.252
+ ip nat outside
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Serial1/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+ip forward-protocol udp
+!
+!
+ip http server
+ip http secure-server
+ip nat inside source route-map RM_ISP1 interface Ethernet0/1 overload
+ip nat inside source route-map RM_ISP2 interface Ethernet0/2 overload
+ip route 0.0.0.0 0.0.0.0 203.0.113.2
+ip route 0.0.0.0 0.0.0.0 198.51.100.2
+ip ssh bulk-mode 131072
+!
+ip access-list standard LAN_ISP1
+ 10 permit 192.168.0.0 0.0.0.127
+ip access-list standard LAN_ISP2
+ 10 permit 192.168.0.128 0.0.0.127
+no logging btrace
+route-map RM_ISP1 permit 10 
+ match ip address LAN_ISP1
+!
+route-map RM_ISP2 permit 10 
+ match ip address LAN_ISP2
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ login
+ transport input ssh
+!
+!
+!
+!
+end
