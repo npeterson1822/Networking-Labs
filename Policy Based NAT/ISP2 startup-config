@@ -1,0 +1,172 @@
+Building configuration...
+
+Current configuration : 3469 bytes
+!
+! Last configuration change at 23:32:09 UTC Sun Nov 30 2025
+!
+version 17.16
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname ISP2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+login on-success log
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-131184644
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-131184644
+ revocation-check none
+ rsakeypair TP-self-signed-131184644
+ hash sha512
+!
+!
+crypto pki certificate chain TP-self-signed-131184644
+ certificate self-signed 01
+  3082032E 30820216 A0030201 02020101 300D0609 2A864886 F70D0101 0D050030 
+  30312E30 2C060355 04030C25 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333131 38343634 34301E17 0D323531 31333032 33313333 
+  395A170D 33353131 33303233 31333339 5A303031 2E302C06 03550403 0C25494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3133 31313834 
+  36343430 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 82010A02 
+  82010100 DF4DF3C0 7AE5EFDF F7E15456 5A47430E FF4E5799 B84E868F E37B949A 
+  932973D6 5BFB2916 9E68C84D 66555D0B 4F362D07 7D546EA8 DD1FCC09 E3ADF642 
+  E613C968 97F30920 66846744 4D716B86 9E3BFEDE 7CC48D98 803CFA44 415449D8 
+  032D078C 203644B0 AD860A76 6ED8928F E986602A 91F67AB2 E48B4700 4C730C66 
+  CB394A73 B0E7C4E8 183C1D9D F1429838 95F4E888 5F2E46D4 87291278 4D5F1AD8 
+  9726DD0E CAE7EE1D 1A7A2FF4 44208E8C 5340E4A6 4A327177 4CA161AF DCB50502 
+  617B7F29 62BA4D14 7D9BFEC2 0A2348AE 1637B207 45DAD668 AA934D8D 5A5642DA 
+  E431577C 6081426D 817FA97F 29B3493D 9329F987 857BE291 7270C80E 14B95A2C 
+  ECFA46D1 02030100 01A35330 51301D06 03551D0E 04160414 98B26E0A 7F8364A0 
+  AF508F7D 10C490A5 1767E7C1 301F0603 551D2304 18301680 1498B26E 0A7F8364 
+  A0AF508F 7D10C490 A51767E7 C1300F06 03551D13 0101FF04 05300301 01FF300D 
+  06092A86 4886F70D 01010D05 00038201 01002DFC 78365D06 2CCC3ECA A6C643CF 
+  5519BA6A 344BB553 BAD783EA 9FFC8FA4 0B269962 CD2CD88D 077C26F5 99111628 
+  FFD581FB 62F9BA58 2726BDF6 9D5185F5 C700EED0 53668408 2C4DE770 99353B2B 
+  CB8B51DB 03AE869E CFEBA754 0C4CEAE2 0A2CD86D E26E3DA1 58D9E577 9E3410BB 
+  D1C7E29B A70E0988 330249DA C49AA986 363FAC0F 30CFDD19 DD434C11 6B05400F 
+  CE9CFE2E 6FC42C9B 07D30851 5A834E85 BD0B88E9 552C95CA CADF6BD0 AAB0AD4C 
+  5103D41B DBE5F656 44432D7E 6D003ABE 023302E2 523255A9 71667A75 39CACA87 
+  C3ABFCB1 052D14CC 47669FE1 7CA18B6F 39E6EE32 FF3C1F36 18D23920 ACAE71EE 
+  60B2B9BC 4F3B6D33 1DF5E497 B376A40C 4D39
+  	quit
+!
+!
+memory free low-watermark processor 79983
+!
+!
+spanning-tree mode rapid-pvst
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 198.51.100.2 255.255.255.252
+!
+interface Ethernet0/1
+ ip address 203.2.113.1 255.255.255.252
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Serial1/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial1/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+ip forward-protocol udp
+!
+!
+ip http server
+ip http secure-server
+ip ssh bulk-mode 131072
+no logging btrace
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ login
+ transport input ssh
+!
+!
+!
+!
+end
