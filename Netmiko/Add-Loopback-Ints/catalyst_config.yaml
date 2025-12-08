@@ -1,0 +1,13 @@
+interfaces:
+  - name: loopback555
+    description: LAN
+    ip: 10.10.20.147
+    netmask: 255.255.255.0
+  - name: loopback556
+    description: UPLINK1
+    ip: 172.20.2.3
+    netmask: 255.255.255.240
+  - name: loopback557
+    description: UPLINK2
+    ip: 172.20.3.2
+    netmask: 255.255.255.240
