@@ -1,0 +1,112 @@
+{
+  "devices": [
+    {
+      "name": "core-r1",
+      "router_id": "1.1.1.1",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet0/0",
+          "ip": "10.0.0.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "ip": "10.0.1.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "ip": "10.0.2.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        }
+      ]
+    },
+    {
+      "name": "core-r2",
+      "router_id": "2.2.2.3",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet0/0",
+          "ip": "10.0.0.2",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet0/1",
+          "ip": "10.0.3.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet0/2",
+          "ip": "10.0.4.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        }
+      ]
+    },
+    {
+      "name": "dist-sw1",
+      "router_id": "3.3.3.3",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.3.2",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 5, "dead": 20 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet1/1",
+          "ip": "10.0.5.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet1/2",
+          "ip": "10.0.6.1",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1400
+        }
+      ]
+    },
+    {
+      "name": "edge-sw-new-neighbor",
+      "router_id": "2.2.2.2",
+      "interfaces": [
+        {
+          "name": "GigabitEthernet1/0",
+          "ip": "10.0.6.2",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet1/1",
+          "ip": "10.0.100.2",
+          "mask": "255.255.255.252",
+          "ospf": { "area": 0, "hello": 10, "dead": 40 },
+          "mtu": 1500
+        },
+        {
+          "name": "GigabitEthernet1/2",
+          "ip": "192.168.50.1",
+          "mask": "255.255.255.0",
+          "ospf": null,
+          "mtu": 1500
+        }
+      ]
+    }
+  ]
+}
