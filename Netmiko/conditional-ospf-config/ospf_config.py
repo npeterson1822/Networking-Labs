@@ -23,7 +23,7 @@ for device in devices:
         name = iface["name"]
         int_ip = iface["ip"]
         int_wc = subnet_to_wc(iface["mask"])
-        commands.append(f"network {int_ip} {int_wc}")
+        commands.append(f"network {int_ip} {int_wc} area 0")
         # Make any LAN (192.168.0.0/16) interfaces passive
         if int_ip[0:7] == "192.168":
             commands.append(f"passive-interface {name}")
